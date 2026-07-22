@@ -1,0 +1,53 @@
+name: Build Firefox extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      # webpack 4 использует md4-хэши, которые не работают с OpenSSL 3 в новых версиях Node
+      NODE_OPTIONS: --openssl-legacy-provider
+      BROWSER: firefox
+      VUE_APP_SHIKIMORI_CLIENT_ID: ${{ secrets.VUE_APP_SHIKIMORI_CLIENT_ID }}
+      VUE_APP_SHIKIMORI_CLIENT_SECRET: ${{ secrets.VUE_APP_SHIKIMORI_CLIENT_SECRET }}
+      VUE_APP_SHIKIMORI_REDIRECT_URI: ${{ secrets.VUE_APP_SHIKIMORI_REDIRECT_URI }}
+      # Оставьте секрет FIREFOX_EXTENSION_ID пустым/неустановленным для самой первой
+      # публикации — Mozilla сама присвоит ID. После первой отправки впишите
+      # присвоенный ID в этот секрет, чтобы последующие версии обновляли тот же аддон.
+      FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run build
+
+      - name: Package extension as zip
+        run: |
+          cd dist/firefox
+          zip -r "../../play-shikimori-online-firefox-${GITHUB_REF_NAME}.zip" .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-extension
+          path: play-shikimori-online-firefox-*.zip
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: play-shikimori-online-firefox-*.zip

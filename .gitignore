@@ -25,4 +25,7 @@ yarn-error.log*
 
 *.zip
 CLAUDE.md
-.github/
+.github/*
+!.github/workflows/
+!.github/ISSUE_TEMPLATE/
+!.github/FUNDING.yml

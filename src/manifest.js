@@ -111,9 +111,15 @@ if (process.env.BROWSER === 'firefox') {
 
     manifest.browser_specific_settings = {
         gecko: {
-            id: process.env.FIREFOX_EXTENSION_ID,
             strict_min_version: '67.0',
         },
+    }
+
+    // Для самой первой отправки в addons.mozilla.org id лучше не указывать вовсе —
+    // Mozilla присвоит его сама. FIREFOX_EXTENSION_ID может быть не задан в CI (пустая
+    // строка), поэтому проверяем через truthy, а не через простое присвоение.
+    if (process.env.FIREFOX_EXTENSION_ID) {
+        manifest.browser_specific_settings.gecko.id = process.env.FIREFOX_EXTENSION_ID
     }
 
     manifest.incognito = 'spanning'
