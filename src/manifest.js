@@ -33,7 +33,7 @@ const manifest = {
 
     default_locale: 'ru',
 
-    homepage_url: 'https://t.me/playshikionline',
+    homepage_url: 'https://github.com/and1helicopter/play-shikimori-online',
 
     icons: {
         '192': 'play.png',
