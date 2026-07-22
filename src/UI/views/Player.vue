@@ -135,9 +135,9 @@
                 const url = new URL('https://vk.com/share.php');
                 url.searchParams.append(
                     'url',
-                    'https://github.com/cawa-93/play-shikimori-online/blob/master/README.md#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0',
+                    'https://github.com/and1helicopter/play-shikimori-online/blob/master/README.md#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0',
                 );
-                url.searchParams.append('title', 'Play Шикимори Online');
+                url.searchParams.append('title', 'Play Anime Online');
                 url.searchParams.append(
                     'comment',
                     'Лучший способ смотреть аниме прямо на сайте shikimori.io',

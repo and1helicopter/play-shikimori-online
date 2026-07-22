@@ -78,7 +78,7 @@
             {
                 icon: 'mdi-github-circle',
                 label: 'Исходный код на GitHub',
-                url: 'https://github.com/cawa-93/play-shikimori-online',
+                url: 'https://github.com/and1helicopter/play-shikimori-online',
             },
         ];
 

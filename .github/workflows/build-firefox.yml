@@ -45,15 +45,15 @@ jobs:
       - name: Package extension as zip
         run: |
           cd dist/firefox
-          zip -r "../../play-shikimori-online-firefox-${GITHUB_REF_NAME}.zip" .
+          zip -r "../../play-anime-online-firefox-${GITHUB_REF_NAME}.zip" .
 
       - uses: actions/upload-artifact@v4
         with:
           name: firefox-extension
-          path: play-shikimori-online-firefox-*.zip
+          path: play-anime-online-firefox-*.zip
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: play-shikimori-online-firefox-*.zip
+          files: play-anime-online-firefox-*.zip

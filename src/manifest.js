@@ -111,7 +111,20 @@ if (process.env.BROWSER === 'firefox') {
 
     manifest.browser_specific_settings = {
         gecko: {
-            strict_min_version: '67.0',
+            // data_collection_permissions поддерживается только с Firefox 140+
+            // (и с 142+ на Android, см. gecko_android ниже) — addons-linter иначе
+            // ругается "Manifest key not supported by the specified minimum Firefox version".
+            strict_min_version: '140.0',
+            // Обязательное поле для новых расширений на AMO (см. mzl.la/firefox-builtin-data-consent).
+            // Расширение не отправляет данные на свои сервера и не собирает аналитику/телеметрию;
+            // единственное, что реально уходит "наружу" — учётные данные OAuth-логина Шикимори,
+            // так как расширение предоставляет вход в аккаунт для синхронизации прогресса просмотра.
+            data_collection_permissions: {
+                required: ['authenticationInfo'],
+            },
+        },
+        gecko_android: {
+            strict_min_version: '142.0',
         },
     }
 

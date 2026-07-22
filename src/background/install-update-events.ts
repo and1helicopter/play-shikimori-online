@@ -29,7 +29,7 @@ chrome.runtime.onInstalled.addListener(async ({reason, previousVersion}: chrome.
         await push({
             id: 'runtime-message-update',
             color: 'success',
-            html: `${manifest.name} обновлен до версии <b>${manifest.version}</b><br><b><a class="white--text" href="https://github.com/cawa-93/play-shikimori-online/releases/tag/v${manifest.version}">Подробнее об изменениях →</a></b>`,
+            html: `${manifest.name} обновлен до версии <b>${manifest.version}</b><br><b><a class="white--text" href="https://github.com/and1helicopter/play-shikimori-online/releases/tag/v${manifest.version}">Подробнее об изменениях →</a></b>`,
         });
 
 

@@ -1,4 +1,4 @@
-# Play Шикимори Online
+# Play Anime Online
 
 Это браузерное расширение, которое позволяет вам смотреть аниме онлайн и синхронизировать его с вашим списком на Шикимори.
 
@@ -17,4 +17,4 @@
 * Ведётся учет в каком переводе вы смотрите. Благодаря этому, когда вы открываете новый сериал, доступен более интелектуальный выбор переводов на основе всех ваших предпочтений.
 
 ## License
-[GPL-3.0](https://github.com/cawa-93/play-shikimori-online/blob/master/LICENSE)
+[GPL-3.0](https://github.com/and1helicopter/play-shikimori-online/blob/master/LICENSE)
