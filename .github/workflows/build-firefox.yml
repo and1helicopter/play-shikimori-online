@@ -10,6 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      # Нужно явно выдать право на запись, иначе softprops/action-gh-release падает
+      # с "Resource not accessible by integration" — по умолчанию GITHUB_TOKEN
+      # часто ограничен только чтением.
+      contents: write
+
     env:
       # webpack 4 использует md4-хэши, которые не работают с OpenSSL 3 в новых версиях Node
       NODE_OPTIONS: --openssl-legacy-provider
