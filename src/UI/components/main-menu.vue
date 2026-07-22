@@ -167,7 +167,7 @@
         get shikiLink() {
             return {
                 label: 'Открыть на Шикимори',
-                url: `https://shikimori.one/animes/${this.shikiID}`,
+                url: `https://shikimori.io/animes/${this.shikiID}`,
             };
         }
 

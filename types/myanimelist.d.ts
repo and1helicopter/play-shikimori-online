@@ -1,27 +1,25 @@
 declare namespace myanimelist {
 
-    interface VideoUrl {
-    }
-
     interface Episode {
-        episode_id: number;
+        mal_id: number;
+        url: string;
         title: string;
         title_japanese: string;
         title_romanji: string;
-        aired: Date;
+        aired: string;
+        score: number;
         filler: boolean;
         recap: boolean;
-        video_url: VideoUrl;
         forum_url: string;
     }
 
     namespace api {
         interface EpisodeCollection {
-            request_hash: string;
-            request_cached: boolean;
-            request_cache_expiry: number;
-            episodes_last_page: number;
-            episodes: Episode[];
+            pagination: {
+                last_visible_page: number;
+                has_next_page: boolean;
+            };
+            data: Episode[];
         }
     }
 

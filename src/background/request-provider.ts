@@ -2,6 +2,8 @@
  * Исполнение сетевых запросов
  */
 import {RequestProvider} from '@/helpers/API/RequestProvider';
+// @ts-ignore
+import {shikimoriHosts} from '@/manifest.js';
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.contentScriptQuery === 'fetchUrl') {
@@ -32,8 +34,10 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     },
     {
         urls: [
-            'https://shikimori.one/api/*',
-            'https://shikimori.one/oauth/*',
+            ...shikimoriHosts.flatMap((host: string) => [
+                `https://${host}/api/*`,
+                `https://${host}/oauth/*`,
+            ]),
             'https://smotret-anime-365.ru/api/*',
             'https://smotret-anime.online/api/*',
         ],

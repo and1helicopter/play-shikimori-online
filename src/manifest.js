@@ -5,11 +5,25 @@ const permissions = [
     'tabs',
 ]
 
+// Домены Шикимори, поддерживаемые "из коробки". shikimori.io — актуальный домен,
+// shikimori.one/shikimori.org оставлены для старых ссылок и на случай отката домена.
+const shikimoriHosts = [
+    'shikimori.io',
+    'shikimori.one',
+    'shikimori.org',
+]
+
 const origins = [
-    'https://shikimori.one/*',
+    ...shikimoriHosts.map((host) => `https://${host}/*`),
     'https://smotret-anime-365.ru/*',
     'https://smotret-anime.online/*',
     'https://api.jikan.moe/*',
+]
+
+// Разрешение, которое запрашивается у пользователя только когда он сам
+// добавляет дополнительный домен Шикимори в настройках (на случай переезда сайта)
+const optionalOrigins = [
+    'https://*/*',
 ]
 
 const manifest = {
@@ -54,12 +68,13 @@ const manifest = {
         ...origins,
     ],
 
+    optional_permissions: [
+        ...optionalOrigins,
+    ],
+
     content_scripts: [
         {
-            matches: [
-                'https://shikimori.org/*',
-                'https://shikimori.one/*',
-            ],
+            matches: shikimoriHosts.map((host) => `https://${host}/*`),
             js: [
                 'shikimori-watch-button.js',
             ],
@@ -109,4 +124,6 @@ module.exports = {
     default: manifest,
     permissions,
     origins,
+    optionalOrigins,
+    shikimoriHosts,
 }

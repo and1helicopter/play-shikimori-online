@@ -113,12 +113,12 @@ export class Player extends VuexModule {
             return;
         }
 
-        for (const {title, episode_id} of episodes) {
+        for (const {title, mal_id} of episodes) {
             if (!title) {
                 continue;
             }
 
-            const episode = this.episodes.find((e) => e.episodeInt === episode_id);
+            const episode = this.episodes.find((e) => e.episodeInt === mal_id);
 
             if (!episode || episode.episodeTitle) {
                 continue;
@@ -336,7 +336,7 @@ export class Player extends VuexModule {
 
         try {
             while (true) {
-                const path = `/anime/${myAnimelist}/episodes/${currentPage}`;
+                const path = `/anime/${myAnimelist}/episodes?page=${currentPage}`;
                 promise = MyAnimeListProvider.fetch<myanimelist.api.EpisodeCollection>(path, {
                     errorMessage: 'Невозможно загрузить названия серий',
                 });
@@ -348,13 +348,13 @@ export class Player extends VuexModule {
                 }
 
                 const resp = await promise;
-                if (!resp.episodes || !resp.episodes.length) {
+                if (!resp.data || !resp.data.length) {
                     break;
                 }
 
-                episodesToCommit = resp.episodes;
+                episodesToCommit = resp.data;
 
-                if (currentPage >= resp.episodes_last_page) {
+                if (!resp.pagination || !resp.pagination.has_next_page) {
                     break;
                 }
 

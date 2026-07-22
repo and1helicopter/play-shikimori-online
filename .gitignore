@@ -24,3 +24,5 @@ yarn-error.log*
 *.sw?
 
 *.zip
+CLAUDE.md
+.github/

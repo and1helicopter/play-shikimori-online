@@ -5,7 +5,7 @@
                 class="display-1"
                 v-if="layout.readyToShow">
                 <a
-                    :href="`https://shikimori.one${topic.forum.url}/${topic.linked_type.toLowerCase()}-${topic.linked.id}/${topic.id}`"
+                    :href="`https://shikimori.io${topic.forum.url}/${topic.linked_type.toLowerCase()}-${topic.linked.id}/${topic.id}`"
                     v-if="topic"
                 >Обсуждение {{currentEpisode.episodeInt}} серии</a>
                 <span v-else>Обсуждение {{currentEpisode.episodeInt}} серии</span>
@@ -183,7 +183,7 @@ export default class Comments extends Vue {
 
     public processComment(comment: shikimori.Comment) {
         comment.html_body = comment.html_body
-            .replace(/(href|src)="\//gimu, '$1="https://shikimori.one/')
+            .replace(/(href|src)="\//gimu, '$1="https://shikimori.io/')
             .replace(/<img/gimu, '<img loading="lazy" ')
             .replace(/b-quote/gi, 'blockquote primary elevation-2" role="blockquote')
             .replace(/class="smiley"/gi, 'class="smiley" height="32px"')

@@ -67,7 +67,7 @@
 
         public rules: Array<(v: string) => boolean | string> = [
             (v) => !!v.trim() || 'Текст не может быть пустым',
-            (v) => !hasAbusiveWord(v) || 'Вероятно в тексте содержатся матерные слова. <a href="https://shikimori.one/forum/site/79042">Мат запрещен правилами Шикимори</a>',
+            (v) => !hasAbusiveWord(v) || 'Вероятно в тексте содержатся матерные слова. <a href="https://shikimori.io/forum/site/79042">Мат запрещен правилами Шикимори</a>',
         ];
 
         get user() {

@@ -19,7 +19,7 @@
             <v-list-item-title class="d-flex">
                 <strong>
                     <a
-                        :href="'https://shikimori.one/' + comment.user.nickname"
+                        :href="'https://shikimori.io/' + comment.user.nickname"
                         role="author"
                     >@{{ comment.user.nickname }}</a>
                 </strong>
@@ -28,7 +28,7 @@
                       class="ml-auto"
                 >
                     <a
-                        :href="'https://shikimori.one/comments/' + comment.id"
+                        :href="'https://shikimori.io/comments/' + comment.id"
                         @click.prevent="$emit('answer', comment)"
                         class="caption grey--text"
                     >{{comment.created_at_relative}}</a>

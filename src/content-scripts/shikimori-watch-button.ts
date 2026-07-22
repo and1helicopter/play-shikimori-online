@@ -4,11 +4,18 @@ import {getMostPriorityTranslation, getPriorityTranslationForEpisode} from '@/he
 import {pluralize} from '@/helpers/pluralize';
 import {SelectedTranslation} from '../../types/UI';
 
-// Запуск главной функции
-const mainObserver = new MutationObserver(main);
-const observerConfig = {attributes: true, subtree: true, childList: true};
-mainObserver.observe(document, observerConfig);
-main();
+// Скрипт может быть внедрён повторно (например, при переходах в SPA на страницах
+// с пользовательскими доменами, см. src/background/inject-shikimori-button.ts) —
+// защищаемся от повторной регистрации наблюдателя.
+if (!(window as any).__playShikiOnlineButtonInjected) {
+    (window as any).__playShikiOnlineButtonInjected = true;
+
+    // Запуск главной функции
+    const mainObserver = new MutationObserver(main);
+    const observerConfig = {attributes: true, subtree: true, childList: true};
+    mainObserver.observe(document, observerConfig);
+    main();
+}
 
 
 async function main() {
